@@ -12,7 +12,12 @@ if (fs.existsSync(packageJsonPath)) {
 
   if (packageJson.scripts && packageJson.scripts.postinstall) {
     const pkgManager = shouldUseYarn() ? 'yarn' : 'npm';
-    exec(`${pkgManager} run postinstall`, {cwd: appPath})
+    exec(`${pkgManager} run postinstall`, {cwd: appPath, encoding: 'utf8', stdio: 'inherit'}, (err, stdout, stderr) => {
+      console.log("errr is: ", err)
+      console.log("\nstdout is: ", stdout)
+      console.log("\nstderr is: ", stderr)
+      console.log("\n\n\n")
+    })
   }
 }
 
